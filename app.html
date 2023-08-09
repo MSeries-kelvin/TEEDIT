@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assests/styles/app.css">
+    <title>TEEDIT | edit and save text</title>
+</head>
+<body>
+    
+    <div class="app" id="app">
+        <div class="main-header" id="main-header">
+            <img src="assests/images/teedit_main_logo.PNG" alt="TEEDIT" class="logo">
+        </div>
+        <div class="main-container" id="main-container">
+            <div class="random" id="random">
+
+            </div>
+        </div>
+        <div class="foot-nav" id="foot-nav">
+            <img src="assests/images/add_standard.png" alt="ADD NEW" class="add" id="add">
+        </div>
+        <div class="editor-box" id="editor">
+            <div class="editor" id="edit">
+                <input type="text" placeholder="Title" id="input-head-text">
+                <textarea id="input-body-text"></textarea>
+                <div class="btn-con">
+                    <button type="button" onclick="addNewOne()">Save</button>
+                    <input type="color" value="#FF0000" id="color-picker">
+                </div>
+            </div>
+        </div>
+        <div class="viewer-box" id="viewer">
+            <div class="viewer" id="view">
+                <div class="view-top-con" id="view-top-con">
+                    <div id="output-head-text" class="oht"></div>
+                    <img src="assests/images/bin_standard_dark.png" alt="Delete" id="bin" onclick="removeNewOne()">
+                </div>
+                <div class="view-bottom-con">
+                    <div id="output-body-text" class="obt"></div>
+                </div>
+                <button onclick="editSaved()">EDIT</button>
+            </div>
+        </div>
+    </div>
+<script src="assests/scripts/app.js"></script>
+</body>
+</html>

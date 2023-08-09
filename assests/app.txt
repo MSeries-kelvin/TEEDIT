@@ -1,0 +1,48 @@
+    /*
+    ** Array Data for list items
+    */
+    
+    {
+        headtext: "Lorem ipsum dolor sit amet",
+        sampleText: "come and go",
+        dateText: "June 20",
+        listId: "id0"
+        color: red;
+    },
+    {
+        headtext: "Lorem ipsum dolor sit amet",
+        sampleText: "come and go",
+        dateText: "June 21",
+        listId: "id1"
+        color: red;
+    },
+    {
+        headtext: "Lorem ipsum dolor sit amet",
+        sampleText: "come and go",
+        dateText: "June 22",
+        listId: "id2"
+        color: red;
+    },
+    {
+        headtext: "Lorem ipsum dolor sit amet",
+        sampleText: "come and go",
+        dateText: "June 23",
+        listId: "id3"
+        color: red;
+    }
+    
+    /*
+    ** Array Data for list items 
+    ** end
+    */
+
+
+// CURRENT STATE OF APP
+let host = {
+    editClicked: false,
+    viewClicked: false,
+    editorEmpty: true,
+    contentAlreadySaved: false,
+    viewCurrentItem: undefined
+};
+// END
