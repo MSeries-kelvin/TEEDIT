@@ -48,7 +48,6 @@ this.onload = () => {
         getFromLocalStorage();
         showNoteFromStorage();
     }
-    addEvent();
 };
 // END
 
@@ -76,13 +75,22 @@ let allNoteList = [];
 function showNoteFromStorage() {
     let txt = "";
     for (let x = 0; x < allNoteList.length; x++) {
-        txt += "<div class='list-box' id='" + allNoteList[x].listId + "'><div class='color-keeper'></div><div class='box-head'>" + allNoteList[x].headtext + "</div><div class='box-sample-text'>" + allNoteList[x].sampleText + "</div><div class='box-date'>" + allNoteList[x].dateText + "</div></div>";
+        if (x === allNoteList.length - 1) {
+            let i = allNoteList[x].sampleText;
+            if (i.length > 65) {i = i.substr(0, 65) + "..."};
+            txt += "<div class='list-box last-box' id='" + allNoteList[x].listId + "'><div class='color-keeper'></div><div class='box-head'>" + allNoteList[x].headtext + "</div><div class='box-sample-text'>" + i + "</div><div class='box-date'>" + allNoteList[x].dateText + "</div></div>";
+            break;
+        }
+        let i = allNoteList[x].sampleText;
+        if (i.length > 65) {i = i.substr(0, 65) + "..."};
+        txt += "<div class='list-box' id='" + allNoteList[x].listId + "'><div class='color-keeper'></div><div class='box-head'>" + allNoteList[x].headtext + "</div><div class='box-sample-text'>" + i + "</div><div class='box-date'>" + allNoteList[x].dateText + "</div></div>";
     }
     addNote(txt);
     // color adder
     for ( let x = 0; x < allNoteList.length; x++) {
         document.querySelector("#id" + x + " .color-keeper").style.backgroundColor = allNoteList[x].color;
     }
+    addEvent();
 }
 // END
 
@@ -118,6 +126,7 @@ editor.addEventListener("click", () => {
         host.contentAlreadySaved = false;
         inputHT.value = "";
         inputBT.value = "";
+        colorPicker.value = "#FF0000";
     }
 });
 
@@ -173,8 +182,9 @@ function addNewOne() {
                     host.viewCurrentItem = undefined;
                     let i = inputHT.value;
                     i = i.replace(i[0], i[0].toUpperCase());
+                    if (Number(i.length)) {i = i.replace(i[0], i[0].toUpperCase());}
                     let k = inputBT.value;
-                    k = k.replace(k[0], k[0].toUpperCase());
+                    if (Number(k.length)) {k = k.replace(k[0], k[0].toUpperCase());}
                     let c = colorPicker.value;
                     allNoteList[id].headtext = i;
                     allNoteList[id].sampleText = k;
@@ -184,7 +194,6 @@ function addNewOne() {
                     inputBT.value = "";
                     colorPicker.value = "#FF0000";
                     showNoteFromStorage();
-                    addEvent();
                     editor.style.display = "none";
                     footNav.style.filter = "none";
                     mainCon.style.filter = "none";
@@ -199,9 +208,9 @@ function addNewOne() {
             let x = allNoteList.length;
             x = "id" + x;
             let i = inputHT.value;
-            i = i.replace(i[0], i[0].toUpperCase());
+            if (Number(i.length)) {i = i.replace(i[0], i[0].toUpperCase());}
             let k = inputBT.value;
-            k = k.replace(k[0], k[0].toUpperCase());
+            if (Number(k.length)) {k = k.replace(k[0], k[0].toUpperCase());}
             let c = colorPicker.value;
             let obj =  {
                 headtext: i,
@@ -215,7 +224,6 @@ function addNewOne() {
             inputBT.value = "";
             colorPicker.value = "#FF0000";
             showNoteFromStorage();
-            addEvent();
             editor.style.display = "none";
             footNav.style.filter = "none";
             mainCon.style.filter = "none";
@@ -225,10 +233,6 @@ function addNewOne() {
     };
 }
 // END
-
-// TEST CASES
-
-const binBtn = document.getElementById("bin");
 
 // GET VIEWER AND INPUT DATA INTO IT
 function previewCurrent() {
@@ -263,8 +267,21 @@ function editSaved() {
 }
 // END
 
+// DELETE BUTTON
 function removeNewOne() {
-    window.localStorage.setItem("allNote", "[]");
+    let id = host.viewCurrentItem;
+    allNoteList.splice(id, 1);
+    for (let x = 0; x < allNoteList.length; x++) {
+        allNoteList[x].listId = "id" + x;
+    };
+    outputHT.innerHTML = "";
+    outputBT.innerHTML = "";
+    viewer.style.display = "none";
+    footNav.style.filter = "none";
+    mainCon.style.filter = "none";
+    mainHead.style.filter = "none";
+    saveToLocalStorage();
     getFromLocalStorage();
     showNoteFromStorage();
 }
+// END

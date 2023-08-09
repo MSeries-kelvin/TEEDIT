@@ -42,19 +42,7 @@
             </div>
         </div>
     </div>
-    <button type="button" onclick="getFile()">try it yourself</button> 
-     <script> 
-         function getFile() { 
-             let xhttps = new XMLHttpRequest(); 
-             xhttps.onload = () => { 
-                 let a = xhttps.responseText; 
-                 console.log(a); 
-                 alert(a);
-             } 
-             xhttps.open("GET", "assests/app.txt"); 
-             xhttps.send(); 
-         } 
-     </script>
+
 <script src="assests/scripts/app.js"></script>
 </body>
 </html>
